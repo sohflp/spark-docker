@@ -1,5 +1,5 @@
-export PATH_DEPLOY=.deploy
-export JOB_NAME=src/spark.py
+export PATH_DEPLOY=docker
+export JOB_NAME?=src/spark.py
 
 # Check for specific environment variables
 env-%:
