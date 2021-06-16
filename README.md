@@ -1,24 +1,18 @@
-# Apache Spark powered by Docker
+# Apache Spark + Jupyter notebook
 
-This repo contains a simple example of PySpark job running on an Apache Spark cluster powered by Docker containers.
+This repository contains a basic setup to experiment and study Apache Spark with Python via Jupyter Notebooks.
 
-The Docker image is published by Bitnami: https://github.com/bitnami/bitnami-docker-spark
+## Init Spark container
 
-## Spark cluster init and tests
-
-First of all we need to start the Spark cluster, the current configuration is based on the `docker-compose.yml` offered by Bitnami but the parameters can be adjusted depending on your needs.
-
-This cluster is composed by:
-- 1 master node
-- 2 worker nodes (with 1 GB of memory each)
-
-To start the cluster type the command:
+To start Spark locally type the command:
 
 ```
 make spark-init
 ```
 
-Before submitting your job, set the environment variable `JOB_NAME` with the .py file which has your Spark script (including folder reference), by default this variable value is set as `src/spark.py`.
+## Submit Spark jobs
+
+Before submitting your job, set the environment variable `JOB_NAME` with the .py file which has your Spark script (including folder reference), by default this variable value is set as `src/example_dataframe.py`.
 
 After the cluster is up and running, open a separate terminal session and type the following command:
 
@@ -26,9 +20,27 @@ After the cluster is up and running, open a separate terminal session and type t
 make spark-submit
 ```
 
-The command above triggers the Spark job from the master node.
+## Check logs from container
 
-In case of need to interact with the cluster there is an additional command to access the master node via bash shell, this approach can be used to improve troubleshoot and testing. To access the master node type:
+Use the command below to access the logs:
+
+```
+make spark-logs
+```
+
+Here you can also find the URL to access the Jupyter notebook locally. See the example below for reference:
+
+```
+spark_1  |     To access the notebook, open this file in a browser:
+spark_1  |         file:///home/jovyan/.local/share/jupyter/runtime/nbserver-7-open.html
+spark_1  |     Or copy and paste one of these URLs:
+spark_1  |         http://ced61f64b8bc:8888/?token=3738634afb37cc80120819eb0723329baea38328e8b27dee
+spark_1  |      or http://127.0.0.1:8888/?token=3738634afb37cc80120819eb0723329baea38328e8b27dee
+```
+
+## Interact with Spark via shell
+
+Type the command below:
 
 ```
 make spark-shell

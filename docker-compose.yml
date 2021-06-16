@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  spark:
+    image: jupyter/pyspark-notebook
+    working_dir: /work
+    volumes:
+      - .:/work
+    ports:
+      - 8888:8888
